@@ -94,7 +94,7 @@ def train(model,trainloader,testloader):
         print("Episode:{},Train_Loss:{},Test_loss:{}".format(episode,np.round(train_loss,2),np.round(test_loss,2)))
         
     
-        if episode % 100 ==0:
+        if episode % 10 ==0:
             torch.save({
                     'epoch':e,
                     'model_state_dict': model.state_dict(),

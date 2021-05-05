@@ -84,7 +84,7 @@ def preprocess():
 
     #計算第一次生產為幾歲  計算產犢間隔  計算當時的季節
     for i in range(1,len(report)+1):
-        month=report.loc[i,['2']].item()
+        month=report.loc[i,['3']].item()
         if(month>=3 and month <=5):
             report.loc[i,'26']='spring'
         elif (month>=6 and month <=8):
@@ -160,7 +160,8 @@ def preprocess():
     for i in range(len(submission)):
         ID.append(submission.loc[i,['ID']].item())
         
-    test_data=report.drop(['2','3','4','5','8','12','19','20'],axis=1) #將不需要用來訓練的資料丟掉
+    test_data=report.drop(['2','3','4','5','8','12','19','20','26'],axis=1) #將不需要用來訓練的資料丟掉
+    test_data=test_data.loc[ID]
     report.drop(index=ID,inplace=True)
     
 
@@ -168,7 +169,7 @@ def preprocess():
     #寫檔
     test_data.to_csv('test.csv')
 
-    train=report.drop(['2','3','4','5','8','12','19','20'],axis=1)  #將不需要用來訓練的資料丟掉
+    train=report.drop(['2','3','4','5','8','12','19','20','26'],axis=1)  #將不需要用來訓練的資料丟掉
     train.to_csv('train.csv')
 
 
