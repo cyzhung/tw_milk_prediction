@@ -54,7 +54,7 @@ def load_data():
     return train_data,label
 
 def train(model,trainloader,testloader):
-    e=500
+    e=50
     for episode in range(1,e+1):
         
         train_loss=0.0

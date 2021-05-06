@@ -22,7 +22,7 @@ def preprocess():
         
         
                                           
-    report=report[['2','3','4','5','8','9','10','11','12','14','19','20']]      #2:資料年度/3:資料月份/4:農場代號/5:乳牛編號/8:出生日期/9:胎次/10:泌乳天數
+    report=report[['2','3','4','5','8','9','10','11','12','14','19','20']]      #2:資料年度/3:資料月份/4:農場代號/5:乳牛編號/6:父親編號//7:母親編號8:出生日期/9:胎次/10:泌乳天數
                                                                         #11:乳量/12:這次生產/14:月齡/19:上次生產/20:第一次配種日期
     birth=birth[['1','6']]                                              #1:乳牛編號/6:乳牛體重
 
@@ -59,19 +59,24 @@ def preprocess():
                 r_month=report.loc[j,'3']
 
                 if(r_year==dd.tm_year and r_month == dd.tm_mon and r_farm==s_farm):
-                    report.loc[j,'25']=1
+                    report.loc[j,'25']=spec.loc[i,'2']
+
+
     
 
                 
 
 
 
-    """
-    report['4'].replace('A',1,inplace=True)
-    report['4'].replace('B',2,inplace=True)
-    report['4'].replace('C',3,inplace=True)
-    """
-        
+    #將ABC改為牧場所在地
+    report['4'].replace('A',"桃園",inplace=True)
+    report['4'].replace('B',"彰化",inplace=True)
+    report['4'].replace('C',"屏東",inplace=True)
+    
+
+    #將健康狀態的小寫n轉成大寫
+    spec['2'].replace('n','N',inplace=True)
+
         
     #新增體重
     for i in range(len(birth)):
@@ -147,7 +152,6 @@ def preprocess():
     #將季節轉為one-hot vector
     onehot=pd.get_dummies(report['26'])
     report=report.join(onehot)
-
 
     #將nan填入值
     report['22'].fillna(value=report['22'].mean(),inplace=True)

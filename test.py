@@ -11,7 +11,7 @@ import numpy as np
 from model import Net
 
 def test(model,test_data):
-    check_point=torch.load('./model40.pkl')
+    check_point=torch.load('./model20.pkl')
     model.load_state_dict(check_point['model_state_dict'])
     model.eval()
     result=[]

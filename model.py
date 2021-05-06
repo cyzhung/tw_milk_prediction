@@ -11,9 +11,10 @@ import numpy as np
 class Net(nn.Module):
     def __init__(self,num_input,num_output):
         super(Net,self).__init__()
-        self.fc1=nn.Linear(num_input,256)
+        self.fc1=nn.Linear(num_input,512)
 
-        self.fc2=nn.Linear(256,1)
+        self.fc2=nn.Linear(512,1)
+
         
 
 
@@ -25,7 +26,6 @@ class Net(nn.Module):
         x=F.leaky_relu(self.fc1(x))
         x=self.drop(x)
         x=(self.fc2(x))
-
 
         return x
         

@@ -24,6 +24,8 @@ def load_data():
 if __name__=='__main__':
     train_data,label=load_data()
     X_train,X_test, y_train, y_test =train_test_split(train_data,label,test_size=0.2)
+    print(y_train.shape)
+    print(y_test.shape)
     model=LinearRegression()
     model.fit(X_train,y_train)
     test=pd.read_csv('./test.csv')
